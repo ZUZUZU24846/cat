@@ -4,16 +4,25 @@ document.addEventListener('DOMContentLoaded', function() {
         "窓の外をじっと見ています。",
         "おもちゃで遊んでいます。",
         "昼寝をしています。",
-        "カリカリを食べています。",
+        "餌を食べています。",
         "毛づくろいをしています。",
         "家の中を走り回っています。",
     ];
 
-    function updateBehavior() {
-        const randomBehavior = catBehaviors[Math.floor(Math.random() * catBehaviors.length)];
-        document.getElementById('behavior').textContent = randomBehavior;
+    function updateClockAndBehavior() {
+        const now = new Date();
+        const hours = now.getUTCHours().toString().padStart(2, '0');
+        const minutes = now.getUTCMinutes().toString().padStart(2, '0');
+        const seconds = now.getUTCSeconds().toString().padStart(2, '0');
+        const timeString = `UTC ${hours}:${minutes}:${seconds}`;
+        document.getElementById('clock').textContent = timeString;
+
+        // 20分ごとの更新
+        const totalMinutes = Math.floor((now.getUTCHours() * 60 + now.getUTCMinutes()) / 20);
+        const behaviorIndex = totalMinutes % catBehaviors.length;
+        document.getElementById('behavior').textContent = catBehaviors[behaviorIndex];
     }
 
-    updateBehavior();
-    setInterval(updateBehavior, 1000 * 60 * 20); // 20分ごとに更新
+    updateClockAndBehavior();
+    setInterval(updateClockAndBehavior, 1000); // 毎秒更新
 });

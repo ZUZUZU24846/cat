@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
         "近所の猫と会議をしています。",
         "大きなあくびをしています。",
         "ゆっくりと瞬きをしています。",
+        "揺れる洗濯物にじゃれついています。",
+        "テーブルの上で香箱座りしています。",
     ];
 
     function updateClockAndBehavior() {
